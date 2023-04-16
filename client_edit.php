@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 error_reporting(0);
 include('includes/config.php');
@@ -39,26 +40,26 @@ if(isset($_POST['submit']))
 			status=(:status),remark=(:remark)     WHERE id=(:idedit)";
 	
 	$query = $dbh->prepare($sql);
-	$query-> bindParam(':client_name', $client_name, PDO::PARAM_STR);
-	$query-> bindParam(':client_id', $client_id, PDO::PARAM_STR);
-	$query-> bindParam(':client_pass', $client_pass, PDO::PARAM_STR);
-	$query-> bindParam(':client_number', $client_number, PDO::PARAM_STR);
-	$query-> bindParam(':client_address', $client_address, PDO::PARAM_STR);
-	$query-> bindParam(':plan', $plan, PDO::PARAM_STR);
-	$query-> bindParam(':cost', $cost, PDO::PARAM_STR);
-	$query-> bindParam(':outstanding_cost', $outstanding_cost, PDO::PARAM_STR);
-	$query-> bindParam(':box', $box, PDO::PARAM_STR);
-	$query-> bindParam(':start_date', $start_date, PDO::PARAM_STR);
-	$query-> bindParam(':expiry_date', $expiry_date, PDO::PARAM_STR);
-	$query-> bindParam(':status', $status, PDO::PARAM_STR);
-	$query-> bindParam(':remark', $remark, PDO::PARAM_STR);
+	$query-> bindValue(':client_name', $client_name, PDO::PARAM_STR);
+	$query-> bindValue(':client_id', $client_id, PDO::PARAM_STR);
+	$query-> bindValue(':client_pass', $client_pass, PDO::PARAM_STR);
+	$query-> bindValue(':client_number', $client_number, PDO::PARAM_STR);
+	$query-> bindValue(':client_address', $client_address, PDO::PARAM_STR);
+	$query-> bindValue(':plan', $plan, PDO::PARAM_STR);
+	$query-> bindValue(':cost', $cost, PDO::PARAM_STR);
+	$query-> bindValue(':outstanding_cost', $outstanding_cost, PDO::PARAM_STR);
+	$query-> bindValue(':box', $box, PDO::PARAM_STR);
+	$query-> bindValue(':start_date', $start_date, PDO::PARAM_STR);
+	$query-> bindValue(':expiry_date', $expiry_date, PDO::PARAM_STR);
+	$query-> bindValue(':status', $status, PDO::PARAM_STR);
+	$query-> bindValue(':remark', $remark, PDO::PARAM_STR);
 	
 	
 	
 	
 	
 	
-	$query-> bindParam(':idedit', $editid, PDO::PARAM_INT);
+	$query-> bindValue(':idedit', $editid, PDO::PARAM_INT);
 	if($query->execute())
 	{
 	$msg="Client Updated Successfully"; 
@@ -121,7 +122,7 @@ if(isset($_POST['submit']))
 <?php
 		$sql = "SELECT * from clients where id = :editid";
 		$query = $dbh -> prepare($sql);
-		$query->bindParam(':editid',$editid,PDO::PARAM_INT);
+		$query->bindValue(':editid',$editid,PDO::PARAM_INT);
 		$query->execute();
 		$result=$query->fetch(PDO::FETCH_OBJ);
 		$cnt=1;	

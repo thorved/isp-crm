@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 error_reporting(0);
 include('includes/config.php');
@@ -14,7 +15,7 @@ $id=$_GET['del'];
 
 $sql = "delete from clients WHERE id=:id";
 $query = $dbh->prepare($sql);
-$query -> bindParam(':id',$id, PDO::PARAM_STR);
+$query -> bindValue(':id',$id, PDO::PARAM_STR);
 $query -> execute();
 
 

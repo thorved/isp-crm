@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start(); 
 $_SESSION = array();
 if (ini_get("session.use_cookies")) {
